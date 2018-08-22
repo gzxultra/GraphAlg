@@ -8,7 +8,7 @@ def dfs_iterative(G, src, dst):
         if node == dst:
             return visited
 
-        for edge in G.edges[node]:
+        for edge in reversed(G.edges[node]):
             stack.append(edge)
     return visited
 
