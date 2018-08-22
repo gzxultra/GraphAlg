@@ -14,5 +14,4 @@ def floyd_warshall(G):
             for j in G.nodes:
                 if dist[i][j] > dist[i][k] + dist[k][j]:
                     dist[i][j] = dist[i][k] + dist[k][j]
-
     return dist
