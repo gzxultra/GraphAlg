@@ -18,7 +18,7 @@ class Graph:
 
 
 
-def dijkstra(G):
+def dijkstra(G, src, dst):
     Q = G.nodes
     dist, prev = {}, {}
 

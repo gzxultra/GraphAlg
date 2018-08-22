@@ -12,5 +12,5 @@ def test_dijkstra():
         graph.add_node(node)
     for (_src, _dist, _cost) in flights:
         graph.add_edge(_src, _dist, _cost)
-    result = dijkstra(graph)
+    result = dijkstra(graph, src, dst)
     assert result == ({0: 0, 1: 100, 2: 300, 3: 200}, {0: None, 1: None, 2: 3, 3: 1})
