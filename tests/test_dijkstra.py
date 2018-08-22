@@ -1,7 +1,8 @@
 
 
 def test_dijkstra():
-    from src.dijkstra import dijkstra, Graph
+    from src.dijkstra import dijkstra
+    from src.libs import Graph
 
     n_cities = 4
     flights = [[0,1,100],[0,3,300],[0,2,500],[1,3,100],[3,2,100]]

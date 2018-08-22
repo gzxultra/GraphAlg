@@ -24,6 +24,7 @@ def bfs_recursive(G, src, dst):
         if visited is None:
             visited = []
         visited.append(src)
+
         for edge in set(G.edges[src]):
             if edge in visited:
                 continue
@@ -32,4 +33,3 @@ def bfs_recursive(G, src, dst):
         return visited
 
     return bfs(G, src, dst)
-    
