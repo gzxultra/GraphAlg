@@ -3,7 +3,7 @@
 using namespace std;
 
 void Graph::addNode(int node) {
-	nodes.push_back(node);
+    nodes.push_back(node);
     nNodes ++;
 }
 
@@ -30,10 +30,10 @@ int Graph::getNEdges() {
     return nEdges;
 }
 
-
 vector<int> Graph::getAllEdgeFromNodes() {
     return edgeFromNodes;
 }
+
 vector<int> Graph::getAllEdgeToNodes() {
     return edgeToNodes;
 }

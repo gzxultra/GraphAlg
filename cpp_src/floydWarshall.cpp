@@ -17,7 +17,7 @@ int** floydWarshall(Graph G) {
 
     for (int i=0; i<nNodes; i++) {
         for (int j=0; j<nNodes; j++) {
-            dist[i][j] = INF;
+            dist[i][j] = -1;
         }
     }
 
@@ -32,7 +32,10 @@ int** floydWarshall(Graph G) {
     for (int k=0; k<nNodes; k++) {
         for (int i=0; i<nNodes; i++) {
             for (int j=0; j<nNodes; j++) {
-                if (dist[i][j] > dist[i][k] + dist[k][j]) {
+                if (dist[i][k] == -1 or dist[k][j] == -1) {
+                    continue;
+                }
+                if (dist[i][j] == -1  or dist[i][j] > dist[i][k] + dist[k][j]) {
                     dist[i][j] = dist[i][k] + dist[k][j];
                 }
             }
@@ -55,11 +58,11 @@ int main(int argc, char** argv) {
     graph.addEdge(1, 3, 100);
     graph.addEdge(3, 2, 100);
 
-    int** dist;
-    dist = floydWarshall(graph);
+    int** dist = floydWarshall(graph);
+
     for (int i=0; i<nNodes; i++) {
         for (int j=0; j<nNodes; j++) {
-            std::cout << dist[i][j];
+            std::cout << dist[i][j] << ' ';
         }
         std::cout << std::endl;
     }
