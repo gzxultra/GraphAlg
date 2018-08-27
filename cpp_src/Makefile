@@ -1,5 +1,5 @@
 all:
-	g++ floydWarshall.cpp graph.cpp
+	g++ floydWarshall.cpp graph.cpp  -fopenmp
 run:
 	./a.out
 clean:

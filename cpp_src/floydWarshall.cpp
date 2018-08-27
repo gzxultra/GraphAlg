@@ -1,6 +1,8 @@
 #include "graph.h"
 #include <vector>
 #include <iostream>
+#include <omp.h>
+
 #define INF (unsigned)!((int)0)
 
 
@@ -29,18 +31,22 @@ int** floydWarshall(Graph G) {
         dist[v][v] = 0;
     }
 
-    for (int k=0; k<nNodes; k++) {
-        for (int i=0; i<nNodes; i++) {
-            for (int j=0; j<nNodes; j++) {
-                if (dist[i][k] == -1 or dist[k][j] == -1) {
-                    continue;
-                }
-                if (dist[i][j] == -1  or dist[i][j] > dist[i][k] + dist[k][j]) {
-                    dist[i][j] = dist[i][k] + dist[k][j];
+    #pragma omp parallel num_threads(3) {
+        for (int k=0; k<nNodes; k++) {
+    #pragma omp for
+            for (int i=0; i<nNodes; i++) {
+    #pragma omp for
+                for (int j=0; j<nNodes; j++) {
+                    if (dist[i][k] == -1 or dist[k][j] == -1) {
+                        continue;
+                    }
+                    if (dist[i][j] == -1  or dist[i][j] > dist[i][k] + dist[k][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                    }
                 }
             }
         }
-    }
+    } // pragma
 
     return dist;
 }
