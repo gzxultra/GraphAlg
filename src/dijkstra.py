@@ -1,25 +1,16 @@
 def dijkstra(G, src, dst):
-    Q = G.nodes
+    Q = list(G.nodes)
     dist, prev = {}, {}
 
     for v in Q:
-        dist[v] = G.distances.get((src, v)) or float('inf')
+        dist[v] = float('inf')
         prev[v] = None
 
     dist[src] = 0
-    Q.remove(src)
 
     while Q:
-        u, cost = None, float('inf')
-        for node in Q:
-            if node == src or not G.distances[(src, node)]:
-                continue
-            if G.distances[(src, node)] < cost:
-                u, cost = node, G.distances[(src, node)]
-        if not u:
-            break
-
-        Q.remove(u)
+        Q.sort(key=lambda x: dist.get(x, float('inf')), reverse=True)
+        u = Q.pop()
 
         for v in G.edges[u]:
             alt = G.distances[(u,v)] + dist[u]
@@ -29,3 +20,14 @@ def dijkstra(G, src, dst):
                 prev[v] = u
 
     return dist, prev
+
+
+# defaultdict(list,
+#             {0: [1, 1, 4, 2],
+#              1: [2, 6, 5, 0],
+#              2: [4, 5, 1, 0],
+#              3: [7],
+#              4: [0, 2],
+#              5: [6, 2, 1],
+#              6: [1, 5],
+#              7: [3]})
